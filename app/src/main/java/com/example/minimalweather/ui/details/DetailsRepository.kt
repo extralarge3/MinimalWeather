@@ -6,8 +6,9 @@ import com.example.minimalweather.Model.Location
 import com.example.minimalweather.Network.WeatherService
 import com.example.minimalweather.Persistence.CurrentWeatherDao
 import com.example.minimalweather.Persistence.LocationDao
+import javax.inject.Inject
 
-class DetailsRepository(
+class DetailsRepository @Inject constructor(
     private val weatherService: WeatherService,
     private val currentWeatherDao: CurrentWeatherDao,
 ) {

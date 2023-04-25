@@ -1,3 +1,5 @@
 package com.example.minimalweather.ui.details
 
-fun detailsScreen(){}
+fun detailsScreen(
+    viewModel: DetailsViewModel
+){}

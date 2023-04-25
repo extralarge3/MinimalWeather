@@ -5,8 +5,11 @@ import androidx.lifecycle.ViewModel
 import com.example.minimalweather.Model.CurrentWeather
 import com.example.minimalweather.Model.ForecastWeather
 import com.example.minimalweather.Model.Location
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DetailsViewModel(
+@HiltViewModel
+class DetailsViewModel @Inject constructor(
     repository: DetailsRepository
 ) :ViewModel() {
     val forecast: MutableLiveData<ForecastWeather> = TODO()
