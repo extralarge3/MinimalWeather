@@ -1,4 +1,4 @@
-package com.example.minimalweather
+package com.example.minimalweather.ui.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
