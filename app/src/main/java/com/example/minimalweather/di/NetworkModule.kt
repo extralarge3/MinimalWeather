@@ -12,7 +12,7 @@ import javax.inject.Singleton
 object NetworkModule {
     @Provides
     @Singleton
-    fun provideDisneyService(): WeatherService {
+    fun provideWeatherService(): WeatherService {
         return TODO("Provide the return value")
     }
 }

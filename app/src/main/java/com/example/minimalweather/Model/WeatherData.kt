@@ -2,7 +2,7 @@ package com.example.minimalweather.Model
 
 import java.util.Date
 
-class WeatherData(
+data class WeatherData(
     val timeStamp: Date,
     val temp: Double,
     val minTemp: Double,

@@ -1,6 +1,6 @@
 package com.example.minimalweather.Model
 
-class CurrentWeather(
-   weatherData: WeatherData,
-   location: Location
+data class CurrentWeather(
+   val weatherData: WeatherData,
+   val location: Location
 ) {}
