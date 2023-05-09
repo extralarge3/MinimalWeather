@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
-    repository: DetailsRepository
+    val repository: DetailsRepository
 ) :ViewModel() {
     val forecast: MutableLiveData<ForecastWeather> = TODO()
 

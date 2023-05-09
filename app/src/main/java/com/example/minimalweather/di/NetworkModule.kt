@@ -30,7 +30,7 @@ object NetworkModule {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(
-                "https://api.openweathermap.org/data/2.5"
+                "https://api.openweathermap.org/data/2.5/"
             )
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())

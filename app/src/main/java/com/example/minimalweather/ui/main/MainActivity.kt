@@ -1,6 +1,7 @@
 package com.example.minimalweather.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -13,7 +14,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.minimalweather.ui.theme.MinimalWeatherTheme
+import com.skydoves.sandwich.message
+import com.skydoves.sandwich.suspendOnError
+import com.skydoves.sandwich.suspendOnException
+import com.skydoves.sandwich.suspendOnSuccess
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 //git flow test
 
@@ -28,25 +35,48 @@ class MainActivity : ComponentActivity() {
             MinimalWeatherTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Greeting("Android", viewModel)
+                    Greeting("Android")
                 }
+            }
+        }
+
+        GlobalScope.launch {
+            val response = viewModel!!.networktest()
+            response.suspendOnSuccess {
+                Log.e("TEST", data.toString())
+            }.suspendOnError {
+                Log.e("TEST", message().toString())
+            }.suspendOnException {
+                Log.e("TEST", "welll")
+            // handles exceptional cases
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, viewModel: MainViewModel? = null, modifier: Modifier = Modifier) {
+fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
             text = "Hello $name!",
             modifier = modifier
     )
-    Button(onClick = {
-        //viewModel.
-
-    }) {
-        Text(text = "Test Button")
-    }
+//    Button(onClick = {
+//        GlobalScope.launch {
+//            val response = viewModel!!.networktest()
+//            response.suspendOnSuccess {
+//                Log.d("TEST", data.toString())
+//            }.suspendOnError {
+//                Log.d("TEST", "network error")
+//            }.suspendOnException {
+//                Log.d("TEST", "welll")
+//            // handles exceptional cases
+//            }
+//        }
+//
+//
+//    }) {
+//        Text(text = "Test Button")
+//    }
 
 }
 

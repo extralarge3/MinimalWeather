@@ -1,9 +1,11 @@
 package com.example.minimalweather.di
 
 import android.app.Application
+import androidx.room.Room
 import com.example.minimalweather.Persistence.AppDatabase
 import com.example.minimalweather.Persistence.CurrentWeatherDao
 import com.example.minimalweather.Persistence.LocationDao
+import com.example.minimalweather.R
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,18 +18,25 @@ object PersistenceModule {
     @Provides
     @Singleton
     fun provideAppDatabase(application: Application): AppDatabase {
-        return TODO("Provide the return value")
+        return Room
+            .databaseBuilder(
+                application,
+                AppDatabase::class.java,
+                application.getString(R.string.database)
+            )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides
     @Singleton
     fun provideCurrentWeatherDao(appDatabase: AppDatabase): CurrentWeatherDao {
-        return TODO("Provide the return value")//appDatabase.currentWeatherDao()
+        return appDatabase.currentWeatherDao()
     }
 
     @Provides
     @Singleton
     fun provideLocationDao(appDatabase: AppDatabase): LocationDao {
-        return TODO("Provide the return value")//appDatabase.locationDao()
+        return appDatabase.locationDao()
     }
 }

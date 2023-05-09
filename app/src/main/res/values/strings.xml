@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MinimalWeather</string>
+    <string name="database">SimpleWeather.db</string>
 </resources>
