@@ -39,18 +39,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-
-        GlobalScope.launch {
-            val response = viewModel!!.networktest()
-            response.suspendOnSuccess {
-                Log.e("TEST", data.toString())
-            }.suspendOnError {
-                Log.e("TEST", message().toString())
-            }.suspendOnException {
-                Log.e("TEST", "welll")
-            // handles exceptional cases
-            }
-        }
     }
 }
 

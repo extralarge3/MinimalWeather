@@ -9,7 +9,7 @@ import com.example.minimalweather.Model.WeatherData
 
 @Entity(tableName = "currentweather")
 data class CurrentWeather(
-   @PrimaryKey val id: String,
+   @PrimaryKey(autoGenerate = true) val id: Int = 0,
    @Embedded val weatherData: WeatherData,
    @ColumnInfo(name = "location_id") val locationID: Int
 ) {}

@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import java.util.Date
 
 data class WeatherData(
-    val timestamp: String,
+    val timestamp: Int,
     val temp: Double,
     @ColumnInfo(name = "mintemp") val minTemp: Double,
     @ColumnInfo(name = "maxtemp") val maxTemp: Double,
@@ -15,6 +15,6 @@ data class WeatherData(
     val pressure: Double,
     val cloudiness: Double,
     val wind: Double,
-    val sunrise: String,
-    val sunset: String
+    val sunrise: Int,
+    val sunset: Int
 ) {}

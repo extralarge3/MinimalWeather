@@ -10,6 +10,6 @@ import retrofit2.http.Query
 
 interface WeatherService {
     @GET("weather")
-    suspend fun fetchCurrentWeather(@Query("q") loc: String): ApiResponse<WeatherDataNetwork>
+    suspend fun fetchCurrentWeather(@Query("q") loc: String, @Query("units") units : String = "metric"): ApiResponse<WeatherDataNetwork>
     //fun fetchForecast(loc: Location): ForecastWeather
 }

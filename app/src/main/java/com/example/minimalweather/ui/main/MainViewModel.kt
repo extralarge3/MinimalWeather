@@ -18,8 +18,4 @@ class MainViewModel @Inject constructor(
     fun addLocation(loc: String) {}
     fun removeLocation(loc: Location) {}
 
-    suspend fun networktest(): ApiResponse<WeatherDataNetwork> {
-        return repository.networktest("Budapest")
-    }
-
 }

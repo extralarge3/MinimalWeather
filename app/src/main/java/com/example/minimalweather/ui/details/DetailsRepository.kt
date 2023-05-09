@@ -1,22 +1,45 @@
 package com.example.minimalweather.ui.details
 
+import android.util.Log
 import com.example.minimalweather.Model.CurrentWeather
 import com.example.minimalweather.Model.ForecastWeather
 import com.example.minimalweather.Model.Location
 import com.example.minimalweather.Network.WeatherService
 import com.example.minimalweather.Persistence.CurrentWeatherDao
 import com.example.minimalweather.Persistence.LocationDao
+import com.example.minimalweather.utils.weatherWetworkToDB
+import com.skydoves.sandwich.ApiResponse
+import com.skydoves.sandwich.message
+import com.skydoves.sandwich.suspendOnError
+import com.skydoves.sandwich.suspendOnException
+import com.skydoves.sandwich.suspendOnSuccess
 import javax.inject.Inject
 
 class DetailsRepository @Inject constructor(
     private val weatherService: WeatherService,
     private val currentWeatherDao: CurrentWeatherDao,
+    private val locationDao: LocationDao
 ) {
-    fun getDetailedWeather(loc: Location): CurrentWeather {
-        return TODO("Provide the return value")
-    }
+    suspend fun getDetailedWeather(loc: String): CurrentWeather {
+        val locWithWeather = locationDao.getCurrentWeathersForLocation(loc=loc)
 
-    fun getForecast(loc: Location): ForecastWeather{
-        return TODO("Provide the return value")
+        if(locWithWeather.isEmpty()){
+            val response = weatherService.fetchCurrentWeather(loc=loc)
+            if (response is ApiResponse.Success) {
+                val weatherData = weatherWetworkToDB(response.data)
+                val currWeather = CurrentWeather(
+                    weatherData = weatherData,
+                    locationID = locWithWeather.first().location.id
+                )
+                currentWeatherDao.insertWeatherRecords(listOf(currWeather))
+                return currWeather
+            }
+            else{
+                throw Exception()
+            }
+        }
+        else{
+            return locWithWeather.first().weathers.first()
+        }
     }
 }
