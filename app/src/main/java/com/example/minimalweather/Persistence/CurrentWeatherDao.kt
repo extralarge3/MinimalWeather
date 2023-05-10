@@ -17,3 +17,18 @@ interface CurrentWeatherDao {
     @Query("DELETE FROM currentweather")
     fun deleteAll()
 }
+
+object CurrentWeatherDaoMock : CurrentWeatherDao{
+    override fun insertWeatherRecords(records: List<CurrentWeather>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getAll(): List<CurrentWeather> {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteAll() {
+        TODO("Not yet implemented")
+    }
+
+}

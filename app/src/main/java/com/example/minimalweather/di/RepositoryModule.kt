@@ -30,8 +30,9 @@ object RepositoryModule {
     fun provideDetailsRepository(
         weatherService: WeatherService,
         currentWeatherDao: CurrentWeatherDao,
+        locationDao: LocationDao
     ): DetailsRepository {
-        return DetailsRepository(weatherService, currentWeatherDao)
+        return DetailsRepository(weatherService, currentWeatherDao, locationDao)
     }
 
 }

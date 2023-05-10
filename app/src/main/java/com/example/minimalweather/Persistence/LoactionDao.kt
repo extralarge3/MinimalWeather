@@ -30,5 +30,35 @@ interface LocationDao {
     @Transaction
     @Query("SELECT * FROM location WHERE name = :loc")
     fun getCurrentWeathersForLocation(loc: String): List<LocationsWithCurrentWeathers>
+}
+
+object LoactionDaoMock : LocationDao{
+    override fun insertLocation(loc: Location) {
+        TODO("Not yet implemented")
+    }
+
+    override fun updateLocation(loc: Location) {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteLocation(loc: Location) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getAll(): List<Location> {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteAll() {
+        TODO("Not yet implemented")
+    }
+
+    override fun getLocationsWithCurrentWeathers(): List<LocationsWithCurrentWeathers> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getCurrentWeathersForLocation(loc: String): List<LocationsWithCurrentWeathers> {
+        TODO("Not yet implemented")
+    }
 
 }
