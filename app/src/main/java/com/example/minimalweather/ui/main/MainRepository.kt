@@ -2,19 +2,13 @@ package com.example.minimalweather.ui.main
 
 import android.util.Log
 import androidx.annotation.WorkerThread
-import com.example.minimalweather.Model.CurrentWeather
-import com.example.minimalweather.Model.Location
-import com.example.minimalweather.Model.Network.WeatherDataNetwork
-import com.example.minimalweather.Model.WeatherData
-import com.example.minimalweather.Network.WeatherService
-import com.example.minimalweather.Persistence.CurrentWeatherDao
-import com.example.minimalweather.Persistence.LocationDao
+import com.example.minimalweather.model.CurrentWeather
+import com.example.minimalweather.model.Location
+import com.example.minimalweather.network.WeatherService
+import com.example.minimalweather.persistence.CurrentWeatherDao
+import com.example.minimalweather.persistence.LocationDao
 import com.example.minimalweather.utils.weatherWetworkToDB
-import com.skydoves.sandwich.ApiResponse
 import com.skydoves.sandwich.message
-import com.skydoves.sandwich.onError
-import com.skydoves.sandwich.onException
-import com.skydoves.sandwich.onSuccess
 import com.skydoves.sandwich.suspendOnError
 import com.skydoves.sandwich.suspendOnException
 import com.skydoves.sandwich.suspendOnSuccess

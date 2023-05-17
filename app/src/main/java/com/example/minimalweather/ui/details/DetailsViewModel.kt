@@ -2,9 +2,9 @@ package com.example.minimalweather.ui.details
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.minimalweather.Model.CurrentWeather
-import com.example.minimalweather.Model.ForecastWeather
-import com.example.minimalweather.Model.Location
+import com.example.minimalweather.model.CurrentWeather
+import com.example.minimalweather.model.ForecastWeather
+import com.example.minimalweather.model.Location
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

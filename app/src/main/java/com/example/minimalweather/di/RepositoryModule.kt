@@ -1,8 +1,8 @@
 package com.example.minimalweather.di
 
-import com.example.minimalweather.Network.WeatherService
-import com.example.minimalweather.Persistence.CurrentWeatherDao
-import com.example.minimalweather.Persistence.LocationDao
+import com.example.minimalweather.network.WeatherService
+import com.example.minimalweather.persistence.CurrentWeatherDao
+import com.example.minimalweather.persistence.LocationDao
 import com.example.minimalweather.ui.details.DetailsRepository
 import com.example.minimalweather.ui.main.MainRepository
 import dagger.Module
@@ -10,7 +10,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
-import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)

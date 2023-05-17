@@ -1,7 +1,7 @@
 package com.example.minimalweather.di
 
-import com.example.minimalweather.Network.RequestInterceptor
-import com.example.minimalweather.Network.WeatherService
+import com.example.minimalweather.network.RequestInterceptor
+import com.example.minimalweather.network.WeatherService
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides

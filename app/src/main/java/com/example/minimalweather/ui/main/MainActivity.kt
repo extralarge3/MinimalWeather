@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -13,7 +14,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.minimalweather.ui.theme.MinimalWeatherTheme
+import androidx.databinding.DataBindingUtil
+import com.example.minimalweather.R
+import com.example.minimalweather.databinding.ActivityMainBinding
+import com.github.pwittchen.weathericonview.WeatherIconView
 import com.skydoves.sandwich.message
 import com.skydoves.sandwich.suspendOnError
 import com.skydoves.sandwich.suspendOnException
@@ -25,53 +29,27 @@ import kotlinx.coroutines.launch
 //git flow test
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
-    val viewModel: MainViewModel by viewModels()
+    private lateinit var binding: ActivityMainBinding
+    val viewModel by viewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            MinimalWeatherTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Greeting("Android")
-                }
-            }
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.apply {
+            viewModel = this@MainActivity.viewModel
+            lifecycleOwner = this@MainActivity
         }
-    }
-}
+        setContentView(binding.root)
+        binding.adapter = WeatherLocationAdapter(listOf(), viewModel)
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-            text = "Hello $name!",
-            modifier = modifier
-    )
-//    Button(onClick = {
-//        GlobalScope.launch {
-//            val response = viewModel!!.networktest()
-//            response.suspendOnSuccess {
-//                Log.d("TEST", data.toString())
-//            }.suspendOnError {
-//                Log.d("TEST", "network error")
-//            }.suspendOnException {
-//                Log.d("TEST", "welll")
-//            // handles exceptional cases
-//            }
-//        }
-//
-//
-//    }) {
-//        Text(text = "Test Button")
-//    }
 
-}
+        //viewModel.showToast.observe(this) {
+        //    it.getContentIfNotHandled()?.let { movie ->
+        //        Toast.makeText(this, "MovieClicked: ${movie.name}", Toast.LENGTH_SHORT).show()
+        //    }
+        //}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MinimalWeatherTheme {
-        Greeting("Android")
     }
 }

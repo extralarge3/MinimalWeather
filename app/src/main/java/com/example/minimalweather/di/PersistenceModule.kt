@@ -2,9 +2,9 @@ package com.example.minimalweather.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.minimalweather.Persistence.AppDatabase
-import com.example.minimalweather.Persistence.CurrentWeatherDao
-import com.example.minimalweather.Persistence.LocationDao
+import com.example.minimalweather.persistence.AppDatabase
+import com.example.minimalweather.persistence.CurrentWeatherDao
+import com.example.minimalweather.persistence.LocationDao
 import com.example.minimalweather.R
 import dagger.Module
 import dagger.Provides

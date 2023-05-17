@@ -1,4 +1,36 @@
 <resources>
-    <string name="app_name">MinimalWeather</string>
-    <string name="database">SimpleWeather.db</string>
+<string name="app_name">MinimalWeather</string>
+<string name="database">SimpleWeather.db</string>
+<!-- TODO: Remove or change this placeholder text -->
+<string name="delete">DELETE</string>
+<string name="back">BACK</string>
+<string name="refresh">Refresh</string>
+<string name="clear_all">Clear all</string>
+<string name="na">Na</string>
+<string name="forecast">Forecast</string>
+<string name="graphs">Graphs</string>
+<string name="max_temp">Max temp</string>
+<string name="min_temp">Min temp</string>
+<string name="sunset">Sunset</string>
+<string name="sunrise">Sunrise</string>
+<string name="cloudiness">Cloudiness</string>
+<string name="rain_vol">Rain vol</string>
+<string name="wind">Wind</string>
+<string name="humidity">Humidity</string>
+<string name="pressure">Pressure</string>
+<string name="feels_like">Feels like</string>
+<string name="add_location">Add location</string>
+<string name="ok">OK</string>
+<string name="cancel">Cancel</string>
+<string name="enter_new_place_here">Enter new place here</string>
+<string name="add_new_place">Add new place</string>
+<string name="temperature_chart">Temperature chart</string>
+<string name="c">°C</string>
+<string name="rain_chart">Rain chart</string>
+<string name="mm">mm</string>
+<string name="wind_chart">Wind chart</string>
+<string name="km_h">KM/H</string>
+<string name="hi">Hi</string>
+<string name="deg">°</string>
+<string name="lo">Lo</string>
 </resources>

@@ -1,18 +1,11 @@
 package com.example.minimalweather.ui.details
 
-import android.util.Log
-import com.example.minimalweather.Model.CurrentWeather
-import com.example.minimalweather.Model.ForecastWeather
-import com.example.minimalweather.Model.Location
-import com.example.minimalweather.Network.WeatherService
-import com.example.minimalweather.Persistence.CurrentWeatherDao
-import com.example.minimalweather.Persistence.LocationDao
+import com.example.minimalweather.model.CurrentWeather
+import com.example.minimalweather.network.WeatherService
+import com.example.minimalweather.persistence.CurrentWeatherDao
+import com.example.minimalweather.persistence.LocationDao
 import com.example.minimalweather.utils.weatherWetworkToDB
 import com.skydoves.sandwich.ApiResponse
-import com.skydoves.sandwich.message
-import com.skydoves.sandwich.suspendOnError
-import com.skydoves.sandwich.suspendOnException
-import com.skydoves.sandwich.suspendOnSuccess
 import javax.inject.Inject
 
 class DetailsRepository @Inject constructor(
