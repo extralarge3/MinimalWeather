@@ -24,7 +24,9 @@
         card_view:cardElevation="8dp"
         card_view:cardCornerRadius="16dp"
         android:layout_margin="8dp"
-        app:backgroundColor="@{weather}">
+        app:backgroundColor="@{weather}"
+        android:onClick="@{() -> listener.onItemClicked(weather)}"
+        android:onLongClick="@{(view) -> listener.onItemLongClicked(weather, view)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container_card"

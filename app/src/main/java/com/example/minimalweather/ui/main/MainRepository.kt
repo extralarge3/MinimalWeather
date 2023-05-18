@@ -31,6 +31,9 @@ class MainRepository @Inject constructor(
         onError: (String) -> Unit,
         forceUpdate: Boolean = false
     ) = flow{
+        if(forceUpdate){
+            currentWeatherDao.deleteAll()
+        }
         val locationsAndWeathers = locationDao.getLocationsWithCurrentWeathers()
         for(loc in locationsAndWeathers){
             if(loc.weathers.isEmpty() or forceUpdate){
@@ -64,8 +67,12 @@ class MainRepository @Inject constructor(
         locationDao.insertLocation(loc)
     }
 
-    suspend fun removeLocation(loc: Location){
-        locationDao.deleteLocation(loc)
+    suspend fun removeLocation(locId: Int){
+        locationDao.deleteLocation(locId)
+    }
+
+    suspend fun removeAllWeathers(){
+        currentWeatherDao.deleteAll()
     }
 
 }

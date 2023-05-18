@@ -9,6 +9,7 @@ import com.example.minimalweather.R
 
 fun weatherWetworkToDB(data: WeatherDataNetwork) = WeatherData(
     timestamp = data.dt ?: 0,
+    timeZone = data.timezone ?: 0,
     country = data.sys?.country ?: "NA",
     locationName = data.name ?: "NA",
     temp = data.main?.temp ?: 0.0,

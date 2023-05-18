@@ -2,6 +2,7 @@ package com.example.minimalweather.model
 
 data class WeatherData(
     val timestamp: Int,
+    val timeZone: Int,
     val country: String,
     val locationName: String,
     val temp: Double,

@@ -1,35 +1,21 @@
 package com.example.minimalweather.ui.main
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import android.view.View
+import android.widget.PopupMenu
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.databinding.DataBindingUtil
 import com.example.minimalweather.R
 import com.example.minimalweather.databinding.ActivityMainBinding
-import com.github.pwittchen.weathericonview.WeatherIconView
-import com.skydoves.sandwich.message
-import com.skydoves.sandwich.suspendOnError
-import com.skydoves.sandwich.suspendOnException
-import com.skydoves.sandwich.suspendOnSuccess
+import com.example.minimalweather.model.CurrentWeather
+import com.example.minimalweather.ui.details.DetailsActivity
+import com.example.minimalweather.ui.dialogs.NewLocationDialog
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-
-//git flow test
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NewLocationDialog.NewLocationListener, WeatherItemListener {
 
     private lateinit var binding: ActivityMainBinding
     val viewModel by viewModels<MainViewModel>()
@@ -42,14 +28,41 @@ class MainActivity : AppCompatActivity() {
             lifecycleOwner = this@MainActivity
         }
         setContentView(binding.root)
-        binding.adapter = WeatherLocationAdapter(listOf(), viewModel)
+        binding.adapter = WeatherLocationAdapter(listOf(), this)
 
-
-        //viewModel.showToast.observe(this) {
-        //    it.getContentIfNotHandled()?.let { movie ->
-        //        Toast.makeText(this, "MovieClicked: ${movie.name}", Toast.LENGTH_SHORT).show()
-        //    }
-        //}
+        binding.fabAdd.setOnClickListener {
+            NewLocationDialog().show(
+                supportFragmentManager,
+                NewLocationDialog.TAG)
+        }
 
     }
+
+    override fun onPlaceAdded(place: String) {
+        viewModel.addLocation(place)
+    }
+
+    override fun onItemClicked(item: CurrentWeather) {
+        val intent = Intent(this, DetailsActivity::class.java).apply {
+            putExtra("LOCATION_ID", item.locationID)
+        }
+        startActivity(intent)
+    }
+
+    override fun onItemLongClicked(weather: CurrentWeather, view: View) : Boolean {
+        val popup = PopupMenu(this, view)
+        popup.inflate(R.menu.menu_location_long_click)
+        popup.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.delete_place -> {
+                    viewModel.removeLocation(weather.locationID)
+                }
+            }
+            false
+        }
+        popup.show()
+        return false
+    }
+
 }
+

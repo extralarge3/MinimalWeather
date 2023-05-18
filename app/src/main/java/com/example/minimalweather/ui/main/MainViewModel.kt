@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     val repository: MainRepository
-) : ViewModel(), WeatherItemListener {
+) : ViewModel() {
     val weatherList: LiveData<List<CurrentWeather>>
         get() = _weatherList
     val _weatherList = MutableLiveData<List<CurrentWeather>>(emptyList())
@@ -23,23 +23,14 @@ class MainViewModel @Inject constructor(
         getCurrentWeatherList()
     }
 
-    fun addTestdata(){
-        addLocation("Budapest")
-        addLocation("London")
-        addLocation("Barcelona")
-        addLocation("Tokyo")
-        addLocation("Sydney")
-        getCurrentWeatherList()
-    }
-
-    fun getCurrentWeatherList() {
+    fun getCurrentWeatherList(forceUpdate : Boolean = false) {
         viewModelScope.launch {
             val tempList = mutableListOf<CurrentWeather>()
             repository.loadCurrentWeatherForAll(
                 onStart = {},
                 onCompletion = {},
                 onError = {},
-                forceUpdate = false
+                forceUpdate = forceUpdate
             )
                 .collect { element ->
                 tempList.add(element)
@@ -50,19 +41,13 @@ class MainViewModel @Inject constructor(
     fun addLocation(loc: String) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addLocation(Location(loc))
-            //getCurrentWeatherList()
+            getCurrentWeatherList()
         }
     }
-    fun removeLocation(loc: String) {
+    fun removeLocation(locId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.removeLocation(Location(loc))
-            //getCurrentWeatherList()
+            repository.removeLocation(locId)
+            getCurrentWeatherList()
         }
     }
-
-    override fun onItemClicked(item: CurrentWeather) {
-        Log.e("TEST", "clicked")
-    //TODO("Not yet implemented")
-    }
-
 }

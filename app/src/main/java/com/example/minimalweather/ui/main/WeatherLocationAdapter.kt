@@ -1,5 +1,6 @@
 package com.example.minimalweather.ui.main
 
+import android.view.View
 import com.example.minimalweather.model.CurrentWeather
 import com.example.minimalweather.R
 import com.example.minimalweather.databinding.WeatherItemBinding
@@ -23,4 +24,5 @@ class WeatherLocationAdapter(
 
 interface WeatherItemListener {
     fun onItemClicked(item: CurrentWeather)
+    fun onItemLongClicked(item: CurrentWeather, view: View) : Boolean
 }
