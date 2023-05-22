@@ -2,6 +2,9 @@ package com.example.minimalweather.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
 import androidx.activity.viewModels
@@ -28,14 +31,13 @@ class MainActivity : AppCompatActivity(), NewLocationDialog.NewLocationListener,
             lifecycleOwner = this@MainActivity
         }
         setContentView(binding.root)
+        setSupportActionBar(binding.topAppBar)
         binding.adapter = WeatherLocationAdapter(listOf(), this)
-
         binding.fabAdd.setOnClickListener {
             NewLocationDialog().show(
                 supportFragmentManager,
                 NewLocationDialog.TAG)
         }
-
     }
 
     override fun onPlaceAdded(place: String) {
@@ -62,6 +64,26 @@ class MainActivity : AppCompatActivity(), NewLocationDialog.NewLocationListener,
         }
         popup.show()
         return false
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_places, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId){
+        R.id.refresh -> {
+            viewModel.getCurrentWeatherList(forceUpdate = true)
+            true
+        }
+        R.id.clear_all -> {
+            viewModel.removeAll()
+            true
+        }
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
+
     }
 
 }

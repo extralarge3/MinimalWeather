@@ -75,4 +75,8 @@ class MainRepository @Inject constructor(
         currentWeatherDao.deleteAll()
     }
 
+    suspend fun removeAllLocations(){
+        locationDao.deleteAll()
+    }
+
 }

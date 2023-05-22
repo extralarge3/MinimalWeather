@@ -50,4 +50,13 @@ class MainViewModel @Inject constructor(
             getCurrentWeatherList()
         }
     }
+
+    fun removeAll(){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.removeAllWeathers()
+            repository.removeAllLocations()
+            _weatherList.postValue(emptyList())
+        }
+    }
+
 }

@@ -6,8 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.minimalweather.model.CurrentWeather
-import com.example.minimalweather.model.ForecastWeather
-import com.example.minimalweather.model.Location
 import com.example.minimalweather.model.WeatherData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +18,7 @@ class DetailsViewModel @Inject constructor(
     val repository: DetailsRepository
 ) :ViewModel() {
 
-    private val _currentWeather = MutableLiveData<CurrentWeather>(
+    private val _currentWeather = MutableLiveData(
         CurrentWeather(
             id = 0, weatherData = WeatherData(
                 timestamp = 0,
@@ -53,8 +51,8 @@ class DetailsViewModel @Inject constructor(
             val weather = repository.getDetailed1Weather(locId)
             withContext(Dispatchers.Main){
                 _currentWeather.value = weather
-                Log.e("test", locId.toString())
-                Log.e("test", weather.toString())
+                //Log.e("test", locId.toString())
+                //Log.e("test", weather.toString())
             }
         }
     }
